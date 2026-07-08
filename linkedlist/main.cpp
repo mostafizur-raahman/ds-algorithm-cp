@@ -71,11 +71,9 @@ Node *removeK(Node *head, int k)
         return head;
     if (k == 1)
     {
-        Node *tmp = head;
-        head = head->next;
-        free(tmp);
-        return head;
+        return removeHeadOfLL(head);
     }
+
     int cnt = 0;
     Node *prev = NULL;
     Node *tmp = head;
@@ -102,6 +100,6 @@ int main()
     Node *head = convertArr2LL(v);
     // head = removeHeadOfLL(head);
     // head = removeTailofLL(head);
-    head = removeK(head, 3);
+    head = removeK(head, 1);
     printLL(head);
 }
