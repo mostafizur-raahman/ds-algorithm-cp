@@ -2,9 +2,6 @@
 using namespace std;
 #define endl "\n"
 
-using ll = long long;
-using vl = vector<ll>;
-
 class Node
 {
 public:
@@ -15,53 +12,56 @@ public:
     Node(int data)
     {
         this->data = data;
-        this->next = next;
+        this->next = NULL;
     }
 };
+
+Node *convertArr2LL(vector<int> &arr)
+{
+    Node *head = new Node(arr[0]);
+    Node *mover = head;
+    for (int i = 1; i < arr.size(); i++)
+    {
+        Node *newNode = new Node(arr[i]);
+        mover->next = newNode;
+        mover = mover->next;
+    }
+    return head;
+}
+
 void printLL(Node *head)
 {
     Node *tmp = head;
-    if (tmp == NULL)
-    {
-        cout << "Node is empty" << endl;
-    }
-    while (tmp != NULL)
+    while (tmp)
     {
         cout << tmp->data << endl;
         tmp = tmp->next;
     }
 }
-Node *insertInTail(Node *head, int val)
+Node *removeHeadOfLL(Node *head)
 {
-    Node *newNode = new Node(val);
     if (head == NULL)
     {
-        head = newNode;
         return head;
     }
     Node *tmp = head;
-    while (tmp->next != NULL)
-    {
-        tmp = tmp->next;
-    }
-
-    tmp->next = newNode;
+    head = head->next;
+    free(tmp);
     return head;
 }
-Node *removeTail(Node *head)
+Node *removeTailofLL(Node *head)
 {
     if (head == NULL || head->next == NULL)
-    {
         return head;
-    }
 
     Node *tmp = head;
+
     while (tmp->next->next != NULL)
     {
         tmp = tmp->next;
     }
-    free(tmp->next);  // last one in free
-    tmp->next = NULL; // now previous one next is NULL
+    delete tmp->next;
+    tmp->next = NULL;
     return head;
 }
 int main()
@@ -69,17 +69,9 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    Node *head = NULL;
-    int n;
-    while (1)
-    {
-        cin >> n;
-        if (n == -1)
-            break;
-        head = insertInTail(head, n);
-    }
-    printLL(head);
-    cout << endl;
-    head = removeTail(head);
+    vector<int> v = {1, 2, 3, 4};
+    Node *head = convertArr2LL(v);
+    head = removeHeadOfLL(head);
+    head = removeTailofLL(head);
     printLL(head);
 }
