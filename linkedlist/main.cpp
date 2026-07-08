@@ -64,6 +64,35 @@ Node *removeTailofLL(Node *head)
     tmp->next = NULL;
     return head;
 }
+
+Node *removeK(Node *head, int k)
+{
+    if (head == NULL)
+        return head;
+    if (k == 1)
+    {
+        Node *tmp = head;
+        head = head->next;
+        free(tmp);
+        return head;
+    }
+    int cnt = 0;
+    Node *prev = NULL;
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cnt++;
+        if (cnt == k)
+        {
+            prev->next = prev->next->next;
+            free(tmp);
+            break;
+        }
+        prev = tmp;
+        tmp = tmp->next;
+    }
+    return head;
+}
 int main()
 {
     ios::sync_with_stdio(false);
@@ -71,7 +100,8 @@ int main()
 
     vector<int> v = {1, 2, 3, 4};
     Node *head = convertArr2LL(v);
-    head = removeHeadOfLL(head);
-    head = removeTailofLL(head);
+    // head = removeHeadOfLL(head);
+    // head = removeTailofLL(head);
+    head = removeK(head, 3);
     printLL(head);
 }
