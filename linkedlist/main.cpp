@@ -91,6 +91,13 @@ Node *removeK(Node *head, int k)
     }
     return head;
 }
+
+Node *insertIntoHead(Node *head, int val)
+{
+    Node *newHead = new Node(val);
+    newHead->next = head;
+    return newHead;
+}
 int main()
 {
     ios::sync_with_stdio(false);
@@ -100,6 +107,7 @@ int main()
     Node *head = convertArr2LL(v);
     // head = removeHeadOfLL(head);
     // head = removeTailofLL(head);
-    head = removeK(head, 1);
+    // head = removeK(head, 1);
+    head = insertIntoHead(head, 10);
     printLL(head);
 }
