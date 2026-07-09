@@ -55,6 +55,7 @@ Node *insertIntoTail(Node *head, int val)
 }
 
 Node *insertIntoKPosition(Node *head, int val, int k)
+
 {
     if (head == NULL || k == 1)
         return insertIntoHead(head, val);
@@ -74,6 +75,26 @@ Node *insertIntoKPosition(Node *head, int val, int k)
     tmp->next = newNode;
     return head;
 }
+Node *removeHead(Node *head)
+{
+    if (head == NULL)
+        return head;
+    Node *tmp = head;
+    Node *newHead = tmp->next;
+    delete tmp;
+    return newHead;
+}
+Node *removeTail(Node *head)
+{
+    Node *tmp = head;
+    while (tmp->next->next != NULL)
+    {
+        tmp = tmp->next;
+    }
+    delete tmp->next->next;
+    tmp->next = NULL;
+    return head;
+}
 int main()
 {
     vector<int> v = {1, 2, 3, 4};
@@ -85,5 +106,9 @@ int main()
     head = insertIntoTail(head, 11);
     printLL(head);
     head = insertIntoKPosition(head, 12, 70);
+    printLL(head);
+    head = removeHead(head);
+    printLL(head);
+    head = removeTail(head);
     printLL(head);
 }
