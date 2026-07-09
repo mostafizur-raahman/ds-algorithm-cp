@@ -63,8 +63,16 @@ Node *insertIntoKPosition(Node *head, int val, int k)
     Node *newNode = new Node(val);
     for (int i = 1; i <= k - 2; i++)
     {
+        // if length is greater then the actual length
+        if (tmp == NULL)
+            return insertIntoTail(head, val);
+
         tmp = tmp->next;
     }
+
+    if (tmp == NULL)
+        return insertIntoTail(head, val);
+
     newNode->next = tmp->next;
     tmp->next = newNode;
     return head;
@@ -79,6 +87,6 @@ int main()
     printLL(head);
     head = insertIntoTail(head, 11);
     printLL(head);
-    head = insertIntoKPosition(head, 12, 3);
+    head = insertIntoKPosition(head, 12, 70);
     printLL(head);
 }
