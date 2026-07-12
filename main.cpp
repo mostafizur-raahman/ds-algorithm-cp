@@ -7,18 +7,24 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    ll n, q;
-    cin >> n >> q;
-    vi v;
-    v.push_back(0);
-    for (int i = 1; i <= n; i++) {
-        ll tmp;
-        cin >> tmp;
-        v.push_back(v[i - 1] + tmp);
-    }
-    while (q--) {
-        ll l, r;
-        cin >> l >> r;
-        cout << v[r] - v[l - 1] << "\n";
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        ll n, q;
+        cin >> n >> q;
+        vi v(n);
+        for (int i = 0; i < n; i++) {
+            cin >> v[i];
+        }
+        vi pre(n + 1, 0);
+        for (int i = 1; i <= n; i++) {
+            pre[i] = pre[i - 1] + v[i - 1];
+        }
+
+        while (q--) {
+            ll l, r;
+            cin >> l >> r;
+            cout << pre[r] - pre[l - 1] << "\n";
+        }
     }
 }
