@@ -19,27 +19,18 @@ int main() {
             int x;
             cin >> x;
             v.push_back(x);
-            if (x % 2 == 0)
-                cntOf2++;
         }
-        if (cntOf2 % 2 == 1) {
-            cout << "-1\n";
-            continue;
+        bool isUnsorted = false;
+        ll diff = INT_MAX;
+        for (int i = 1; i < n; i++) {
+            if (v[i] < v[i - 1])
+                isUnsorted = true;
+
+            diff = min(diff, abs(v[i] - v[i - 1]));
         }
-        if (cntOf2 == 0) {
-            cout << "1\n";
-            continue;
-        }
-        ll ans = cntOf2 / 2, count = 0;
-        ;
-        for (int i = 0; i < n; i++) {
-            if (v[i] == 2) {
-                count++;
-                if (count == ans) {
-                    cout << i + 1 << "\n";
-                    continue;
-                }
-            }
-        }
+        if (isUnsorted) {
+            cout << 0 << endl;
+        } else
+            cout << (diff / 2) + 1 << endl;
     }
 }
